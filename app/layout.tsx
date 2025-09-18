@@ -3,7 +3,8 @@ import { Urbanist } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
-const font = Urbanist({
+import ModalProvider from "@/providers/modal-provider";
+  const font = Urbanist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body
         className={`${font.variable}  antialiased`}
       >
+        <ModalProvider />
         <Navbar/>
         {children}
         <Footer/>
