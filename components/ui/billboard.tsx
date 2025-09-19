@@ -1,12 +1,30 @@
 import { Billboard as BillboardType } from "@/types";
 
 interface BillboardProps {
-    data: BillboardType;
+    data: BillboardType | null;
 }
 
 const Billboard: React.FC<BillboardProps> = ({
     data
 }) => {
+    console.log('🖼️ Billboard component received data:', data);
+    console.log('🖼️ Billboard data type:', typeof data);
+    console.log('🖼️ Billboard data keys:', data ? Object.keys(data) : 'null');
+    
+    // Return a placeholder if no data is provided
+    if (!data) {
+        console.log('⚠️ Billboard component: No data provided, showing placeholder');
+        return (
+            <div className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-gray-200 flex items-center justify-center">
+                <div className="text-gray-500 text-lg">No billboard data available</div>
+            </div>
+        );
+    }
+    
+    console.log('✅ Billboard component: Rendering billboard with data:', data);
+    console.log('✅ Billboard imageUrl:', data.imageUrl);
+    console.log('✅ Billboard label:', data.label);
+
     return (
         <div 
 className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover bg-center"        

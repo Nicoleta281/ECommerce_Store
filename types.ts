@@ -7,29 +7,49 @@ export interface Billboard {
 export interface Category {
     id: string;
     name: string;
-    billboard: Billboard;
+    billboardId: string;
+    storeId: string;
+    createdAt: string;
+    updatedAt: string;
+    billboard?: Billboard; // Billboard-ul poate fi inclus în categoria
 };
 export interface Product {
     id: string;
     name: string;
     price: string;
-    category: Category;
+    categoryId: string;
     isFeatured: boolean;
+    isArchived: boolean;
+    sizeId: string;
+    colorId: string;
+    storeId: string;
+    createdAt: string;
+    updatedAt: string;
+    images: Image[];
+    category: Category;
     size: Size;
     color: Color;
-    images: Image[];
 };
 export interface Image {
     id: string;
     url: string;
+    productId: string;
+    createdAt: string;
+    updatedAt: string;
 };
 export interface Size {
     id: string;
     name: string;
     value: string;
+    storeId: string;
+    createdAt: string;
+    updatedAt: string;
 };
 export interface Color {
     id: string;
     name: string;
     value: string;
+    storeId: string;
+    createdAt: string;
+    updatedAt: string;
 };

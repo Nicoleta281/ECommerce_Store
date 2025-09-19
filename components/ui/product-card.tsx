@@ -14,6 +14,10 @@ interface ProductCard {
 const ProductCard : React.FC<ProductCard> = ({
     data
 }) => {
+    console.log('🛍️ ProductCard received data:', data);
+    console.log('🛍️ ProductCard data type:', typeof data);
+    console.log('🛍️ ProductCard data keys:', data ? Object.keys(data) : 'null');
+    
     const cart = useCart();
    const router = useRouter();
    const previewModal = usePreviewModal();
@@ -32,13 +36,18 @@ const ProductCard : React.FC<ProductCard> = ({
         <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4" >
             {/* Images and Actions */}
             <div className="aspect-square rounded-xl bg-gray-100 relative">
-                <Image
-                src={data?.images?.[0].url}
-                alt="Image"
-                fill
-                className="aspect-square object-cover rounded-md"
-                />
-            </div>
+                {data?.images?.[0]?.url ? (
+                    <Image
+                        src={data.images[0].url}
+                        alt={data.name || "Product image"}
+                        fill
+                        className="aspect-square object-cover rounded-md"
+                    />
+                ) : (
+                    <div className="flex items-center justify-center h-full text-gray-400">
+                        No image
+                    </div>
+                )}
                 <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
                     <div className="flex gap-x-6 justify-center">
                         <IconButton
@@ -51,10 +60,11 @@ const ProductCard : React.FC<ProductCard> = ({
                         />
                     </div>
                 </div>
+            </div>
             {/* Description */}
             <div>
                 <p className="font-semibold text-lg">{data.name}</p>
-                <p className="text-sm text-gray-500">{data.category.name}</p>
+                <p className="text-sm text-gray-500">{data.category?.name || "No category"}</p>
             </div>
             {/* Price */}
             <div className="flex items-center justify-between">
